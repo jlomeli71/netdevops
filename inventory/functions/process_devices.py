@@ -21,7 +21,7 @@ def process_devices(input_file, log_file):
         print(type(rows))
         print(rows)
         
-        print("Interrumpe aqui")
+
 
         for row in rows:
             if not row[0] == "IP Address":
@@ -61,10 +61,11 @@ def process_devices(input_file, log_file):
                         # Print to check error type
                         print(e)
                         pass
-                    log_message = f"IPv4: {ipv4}, Reachable: {reachable}, Vendor: {vendor}\n"
-                    # log_message += f"Output: {output}\n"
-                    with open(log_file, 'a') as log:
-                        log.write(log_message)
+                    else:
+                        log_message = f"IPv4: {ipv4}, Reachable: {reachable}, Vendor: {vendor}\n, Show command: {output}\n"
+                        # log_message += f"Output: {output}\n"
+                        with open(log_file, 'a') as log:
+                            log.write(log_message)
         
         rows.insert(0, header)
         pprint(rows)
@@ -72,4 +73,3 @@ def process_devices(input_file, log_file):
         with open("finalout.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(rows)
-            
